@@ -1,11 +1,18 @@
 import { PaperProvider } from "react-native-paper";
 import {  StyleSheet, Text, View, Image} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 export default function Profile({route}){
     const navigation = useNavigation();
 
-    const detail = route.params;
+    const student = route.params;
+
+    const MyTabs = createBottomTabNavigator({
+        screens:{
+            Profile:Profile,
+        },
+    })
     return(
         <PaperProvider>
             <View style={styles.container}>
@@ -16,10 +23,27 @@ export default function Profile({route}){
                     </View> 
                 </View> 
 
-                <View style={styles.cont}>
-                    <View></View>
-
+                <View style={styles.section}>
+                    <View><Image/>{student.profile_pic}</View>
+                    <View><Text>{student.name}</Text></View>
+                    <View><Text>Age: {student.age} | </Text></View>
+                    <View><Text>Gender: {student.gender}</Text></View>
                 </View>
+
+                <View style={styles.section}>
+                    <View><Text style={styles.heading}>Contact Information</Text></View>
+                    <View><Text>Email: {student.email}</Text></View>
+                    <View><Text>Age: {student.phone}  </Text></View>
+                    <View><Text>Gender: {student.address}</Text></View>
+                </View>
+
+                <View style={styles.section}>
+                <View><Text style={styles.heading}>Biological Information</Text></View>
+                    <View><Text>Gender: {student.gender}</Text></View>
+                    <View><Text>Age: {student.age} </Text></View>
+                    <View><Text>Blood Group: {student.blood_group} </Text></View>
+                </View>
+
 
                 <View style={styles.footer}>
                     <Text style={styles.footerText}>UoV © Care</Text>

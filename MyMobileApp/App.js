@@ -15,8 +15,11 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='login' style={styles.container}>
-          <Stack.Screen name='login' component={Login} options={{headerShown:false}}/>
+        <Stack.Navigator initialRouteName='login' screenOptions={ {headerTitleAlign: 'center',
+        headerStyle: { backgroundColor: '#4b0150' },
+        headerTitleStyle: { fontWeight: 'bold' , color:'#fff' }}}>
+          
+          <Stack.Screen name='login' component={Login} options={{title:'UoV Student Care'}}/>
           <Stack.Screen name='profile' component={Profile} options={{title:'UoV Student Care'}} style={styles.navigation}/>
           <Stack.Screen name='courses' component={Courses} options={{title:'Courses'}}/>
           <Stack.Screen name='subjects' component={Subjects} options={{title:'Subjects'}}/>
@@ -28,12 +31,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  navigation:{
-    backgroundColor: '#4b0150',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#FFFFFF',
-    //fontSize: 24,
-    //fontWeight: 'bold',
-  }
+  container:{
+    flex:1,
+    backgroundColor: '#fff',  }
 })
