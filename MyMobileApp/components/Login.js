@@ -2,10 +2,32 @@ import { PaperProvider, TextInput, Button } from "react-native-paper";
 import {  StyleSheet, Text, View, Image} from 'react-native';
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import {users} from '../data/StudentsDb';
 
 export default function Login(){
     const navigation = useNavigation();
-    const [id,setId]=useState(null);
+    const[username,setUsername] = useState('');
+    const[password,setPassword] = useState('');
+    const[error,setError] = useState('');
+
+    const handleLogin = () => {
+        if(!username || !password){
+            setError('Please Check username and password');
+            return;
+        }
+
+
+        const user = users[username];
+
+        if(user && user.password === password){
+            navigation.navigate('profile',{username});
+        }
+        else{
+            setError('Please Check username and password');
+        }
+    }
+
+
     return(
         <PaperProvider>
             <View style={styles.container}>
@@ -15,20 +37,22 @@ export default function Login(){
 
                 <View style={styles.body}>
                     <View style={styles.imagepad}>
-                        <Image source={require('../assets/images/uovlogo.png')} style={styles.image}/>
+                        <Image source={require('../assets/profilepic/uovlogo.png')} style={styles.image}/>
                     </View> 
                     <View style={styles.heading}>
                         <Text style={styles.headingText}>STUDENT LOGIN</Text>
                     </View>  
                     <View style={styles.input}>
-                        <TextInput label={'Username'} mode="outlined" value={id} onChangeText={setId}></TextInput>
+                        <TextInput label={'Username'} mode="outlined" value={username} onChangeText={setUsername}></TextInput>
                     </View>
                     <View style={styles.input}>
-                        <TextInput label={'Password'} mode="outlined"></TextInput>
+                        <TextInput label={'Password'} mode="outlined" secureTextEntry value={password} onChangeText={setPassword}></TextInput>
                     </View>
                     <View style={styles.input}>
-                        <Button style={styles.buttonText} mode="outlined" onPress={()=>{navigation.navigate('profile')}}>Login</Button>
-                    </View>                 
+                        <Button style={styles.buttonText} mode="outlined" onPress={handleLogin}>Login</Button>
+                    </View>  
+                    {error && <Text style={styles.errorText}>{error}</Text>}
+               
                 </View>
 
                 <View style={styles.footer}>
@@ -89,6 +113,13 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         backgroundColor:'#4b0150',
     },
+    errorText:{
+        alignItems: 'center',
+        backgroundColor: '#e2bee2',
+        justifyContent: 'center',
+
+    }
+    ,
 
       footer: {
         flex: 0.5,
