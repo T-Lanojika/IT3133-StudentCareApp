@@ -6,9 +6,10 @@ import BottomTap from "./BottomTap";
 import { ScrollView } from "react-native-web";
 import { useRoute } from "@react-navigation/native";
 
-export default function Profile() {
-  const route = useRoute();
-  const { student } = route.params;
+export default function Profile({ student }) {
+  //   const route = useRoute();
+  //   const { student } = route.params;
+  console.log("stu" + student);
 
   return (
     <PaperProvider>

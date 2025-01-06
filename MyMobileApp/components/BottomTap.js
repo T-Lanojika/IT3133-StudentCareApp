@@ -4,10 +4,11 @@ import { Ionicons } from "react-native-vector-icons";
 import Profile from "./Profile";
 import Courses from "./Courses";
 import Subjects from "./Subjects";
+import { courses } from "../data/StudentsDb";
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTap() {
+export default function BottomTap({ student }) {
   return (
     <Tab.Navigator
       initialRouteName="profile"
@@ -29,9 +30,21 @@ export default function BottomTap() {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen name="profile" component={Profile} />
-      <Tab.Screen name="courses" component={Courses} />
-      <Tab.Screen name="subjects" component={Subjects} />
+      <Tab.Screen name="profile">
+        {() => {
+          <Profile user={student} />;
+        }}
+      </Tab.Screen>
+      <Tab.Screen name="courses">
+        {() => {
+          <Courses user={student} />;
+        }}
+      </Tab.Screen>
+      <Tab.Screen name="subjects">
+        {() => {
+          <Subjects user={student} />;
+        }}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }

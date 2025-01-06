@@ -28,7 +28,7 @@ export default function App() {
             component={Login}
             options={{ title: "UoV Student Care" }}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="profile"
             component={Profile}
             options={{ title: "UoV Student Care" }}
@@ -43,7 +43,7 @@ export default function App() {
             name="subjects"
             component={Subjects}
             options={{ title: "Subjects" }}
-          />
+          /> */}
           <Stack.Screen
             name="bottomTap"
             component={BottomTap}
