@@ -16,7 +16,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName='login'>
-          <Stack.Screen name='login' component={Login} options={{title:'Login'}}/>
+          <Stack.Screen name='login' component={Login} options={{headerShown:false}}/>
           <Stack.Screen name='profile' component={Profile} options={{title:'Profile'}}/>
           <Stack.Screen name='courses' component={Courses} options={{title:'Courses'}}/>
           <Stack.Screen name='subjects' component={Subjects} options={{title:'Subjects'}}/>
@@ -27,11 +27,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
