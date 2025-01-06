@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigateContainer>
+      <NavigationContainer>
         <Stack.Navigator initialRouteName='login'>
           <Stack.Screen name='login' component={Login} options={{title:'Login'}}/>
           <Stack.Screen name='profile' component={Profile} options={{title:'Profile'}}/>
@@ -22,7 +22,7 @@ export default function App() {
           <Stack.Screen name='subjects' component={Subjects} options={{title:'Subjects'}}/>
         </Stack.Navigator>
 
-      </NavigateContainer>
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }
