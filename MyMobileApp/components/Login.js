@@ -18,21 +18,21 @@ export default function Login(){
             return;
         }
 
-        const student = students.find((student) => {student.username === username && student.password === password});
+        const student = students.find((student) => student.username === username && student.password === password);
 
         if(student){
             setError('');
             navigation.navigate('profile',{student});
         }
         else{
-            setError('Please Check username and password');
+            setError('Please Check username and password00');
         }
     }
 
 
     return(
         <PaperProvider>
-            <View style={styles.container}>
+            <View style={styles.header}>
                 <View >
                     <Header/>
                 </View>
