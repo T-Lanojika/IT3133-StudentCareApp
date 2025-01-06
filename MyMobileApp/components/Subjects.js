@@ -4,13 +4,14 @@ import {  StyleSheet, Text, View, Image} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import Header from "./Header";
 import Footer from "./Footer";
+import BottomTap from "./BottomTap";
 import { ScrollView } from "react-native-web";
 
 
 export default function Subjects({route}){
     const {courses}=route.params;
 
-    const marksDetail = marks.find((marks => courses.course_id === ))
+    //const marksDetail = marks.find((marks => courses.course_id === ))
     return(
         <PaperProvider>
 
@@ -38,7 +39,9 @@ export default function Subjects({route}){
                 <View style={styles.footer}>
                     <Footer/>
                 </View>
-
+                <View>
+                    <BottomTap/>
+                </View>
 
             
         </PaperProvider>

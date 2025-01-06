@@ -4,6 +4,7 @@ import {  StyleSheet, Text, View, Image} from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import Header from "./Header";
 import Footer from "./Footer";
+import BottomTap from "./BottomTap";
 import { ScrollView } from "react-native-web";
 
 
@@ -38,7 +39,10 @@ export default function Courses({route}){
                 <View style={styles.footer}>
                     <Footer/>
                 </View>
-
+                <View>
+                    <BottomTap/>
+                </View>
+                
 
             
         </PaperProvider>
