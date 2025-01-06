@@ -66,7 +66,7 @@ export default function Login(){
 
 const styles = StyleSheet.create({
     body: {
-        //flex: 6,
+        flex: 5,
         backgroundColor: '#F4F6F',
         alignItems: 'center',
         justifyContent: 'center',
