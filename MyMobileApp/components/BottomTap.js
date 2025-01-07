@@ -1,50 +1,103 @@
+import React from "react";
+import { View, StyleSheet } from "react-native";
+
+import { CommonActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { Ionicons } from "react-native-vector-icons";
+import { Text, BottomNavigation } from "react-native-paper";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Profile from "./Profile";
-import Courses from "./Courses";
+import Course from "./Course";
 import Subjects from "./Subjects";
-import { courses } from "../data/StudentsDb";
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTap({ student }) {
+export default function BottomTab(route) {
   return (
     <Tab.Navigator
-      initialRouteName="profile"
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+      screenOptions={{
+        headerShown: false,
+      }}
+      tabBar={({ navigation, state, descriptors, insets }) => (
+        <BottomNavigation.Bar
+          navigationState={state}
+          safeAreaInsets={insets}
+          onTabPress={({ route, preventDefault }) => {
+            const event = navigation.emit({
+              type: "tabPress",
+              target: route.key,
+              canPreventDefault: true,
+            });
 
-          if (route.name === "profile") {
-            iconName = focused ? "person" : "person-outline";
-          } else if (route.name === "courses") {
-            iconName = focused ? "book" : "book-outline";
-          }
-          if (route.name === "subjects") {
-            iconName = focused ? "clipboard" : "clipboard-outline";
-          }
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: "#4b0150",
-        tabBarInactiveTintColor: "gray",
-      })}
+            if (event.defaultPrevented) {
+              preventDefault();
+            } else {
+              navigation.dispatch({
+                ...CommonActions.navigate(route.name, route.params),
+                target: state.key,
+              });
+            }
+          }}
+          renderIcon={({ route, focused, color }) => {
+            const { options } = descriptors[route.key];
+            if (options.tabBarIcon) {
+              return options.tabBarIcon({ focused, color, size: 24 });
+            }
+
+            return null;
+          }}
+          getLabelText={({ route }) => {
+            const { options } = descriptors[route.key];
+            const label =
+              options.tabBarLabel !== undefined
+                ? options.tabBarLabel
+                : options.title !== undefined
+                ? options.title
+                : route.title;
+
+            return label;
+          }}
+        />
+      )}
     >
-      <Tab.Screen name="profile">
-        {() => {
-          <Profile user={student} />;
+      <Tab.Screen
+        name="Profile"
+        initialParams={route}
+        component={Profile}
+        options={{
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ color, size }) => {
+            return <Icon name="account" size={size} color={color} />;
+          },
         }}
-      </Tab.Screen>
-      <Tab.Screen name="courses">
-        {() => {
-          <Courses user={student} />;
+      />
+      <Tab.Screen
+        name="Course"
+        component={Course}
+        options={{
+          tabBarLabel: "Course",
+          tabBarIcon: ({ color, size }) => {
+            return <Icon name="school" size={size} color={color} />;
+          },
         }}
-      </Tab.Screen>
-      <Tab.Screen name="subjects">
-        {() => {
-          <Subjects user={student} />;
+      />
+      <Tab.Screen
+        name="Subjects"
+        component={Subjects}
+        options={{
+          tabBarLabel: "Subjects",
+          tabBarIcon: ({ color, size }) => {
+            return <Icon name="book-open-outline" size={size} color={color} />;
+          },
         }}
-      </Tab.Screen>
+      />
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
